@@ -59,7 +59,7 @@ namespace MovieCatalog.API.Services.Initialization
                 bool isMovieExist = true;
 
                 #region Sync moview info
-                var movie = movies.FirstOrDefault(x => x.Name != movieModel.Movie.Name);
+                var movie = movies.FirstOrDefault(x => x.Name == movieModel.Movie.Name);
                 if (movie == null)
                 {
                     movie = new Movie();
