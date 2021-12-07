@@ -24,7 +24,7 @@ namespace MovieCatalog.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpPost("/movie/{movieId}/review/add")]
+        [HttpPost("movie/{movieId}/review/add")]
         public async Task<ActionResult> AddReview(Guid movieId, ReviewModifyModel model)
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
@@ -70,7 +70,7 @@ namespace MovieCatalog.API.Controllers
             return Ok();
         }
 
-        [HttpDelete("/movie/{movieId}/review/{id}/edit")]
+        [HttpPut("movie/{movieId}/review/{id}/edit")]
         public async Task<ActionResult> EditReview(Guid movieId, Guid id, ReviewModifyModel model)
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
@@ -116,7 +116,7 @@ namespace MovieCatalog.API.Controllers
             return Ok();
         }
 
-        [HttpDelete("/movie/{movieId}/review/{id}/delete")]
+        [HttpDelete("movie/{movieId}/review/{id}/delete")]
         public async Task<ActionResult> DeleteReview(Guid movieId, Guid id)
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);

@@ -13,11 +13,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MovieCatalog.API.Configuration;
 using MovieCatalog.API.Data;
 using MovieCatalog.API.Models.Data;
+using MovieCatalog.API.Services.Initialization;
 
 namespace MovieCatalog.API
 {
@@ -83,8 +85,13 @@ namespace MovieCatalog.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserManager<User> userManager)
         {
+            using var serviceScope = app.ApplicationServices.CreateScope();
+            var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
+            // auto migration
+            context.Database.Migrate();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -108,6 +115,7 @@ namespace MovieCatalog.API
             {
                 endpoints.MapControllers();
             });
+            Task.Run(() => EntitiesInitializer.Initialize(userManager, context)).Wait();
         }
     }
 }

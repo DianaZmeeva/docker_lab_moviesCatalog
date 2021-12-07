@@ -9,5 +9,6 @@ namespace MovieCatalog.API.Models.Api.Users
     {
         public Guid UserId { get; set; }
         public string NickName { get; set; }
+        public String Avatar { get; set; }
     }
 }

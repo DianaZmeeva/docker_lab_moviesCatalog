@@ -26,9 +26,7 @@ namespace MovieCatalog.API.Controllers
             var pageSize = ConfigurationConstants.DefaultPageSize;
             var movies = Context.Movies
                 .Include(m=>m.Genres)
-                .OrderByDescending(x=>x.Rating)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize);
+                .OrderByDescending(x=>x.Rating);
 
             PageInfoModel pageInfo = new PageInfoModel()
             {
@@ -37,22 +35,26 @@ namespace MovieCatalog.API.Controllers
                 PageCount = (int)Math.Ceiling((double)movies.Count() / (double)pageSize)
             };
 
+            var t = movies.ToList();
+
             return new MoviesPagedListModel
             {
-                Movies = movies.Select(x=>new MovieElementModel
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    Poster = x.PosterLink,
-                    Year = x.Year,
-                    Country = x.Country,
-                    Rating = x.Rating,
-                    Genres = x.Genres.Select(g=>new GenreModel
+                Movies = movies.Skip((page - 1) * pageSize)
+                    .Take(pageSize)
+                    .Select(x => new MovieElementModel
                     {
-                        Id = g.Id,
-                        Name = g.Name
-                    }).ToList()
-                }).ToList(),
+                        Id = x.Id,
+                        Name = x.Name,
+                        Poster = x.PosterLink,
+                        Year = x.Year,
+                        Country = x.Country,
+                        Rating = x.Rating,
+                        Genres = x.Genres.Select(g => new GenreModel
+                        {
+                            Id = g.Id,
+                            Name = g.Name
+                        }).ToList()
+                    }).ToList(),
                 PageInfo = pageInfo
             };
 
@@ -102,7 +104,8 @@ namespace MovieCatalog.API.Controllers
                         : new UserShortModel
                         {
                             UserId = (Guid)r.AuthorId,
-                            NickName = r.Author?.UserName
+                            NickName = r.Author?.UserName,
+                            Avatar = r.Author?.Avatar
                         }
                 }).ToList()
             };
