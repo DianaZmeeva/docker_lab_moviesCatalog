@@ -10,10 +10,15 @@ namespace MovieCatalog.API.Models.Data
     public class User : IdentityUser<Guid>, IBaseEntity
     {
         [Required]
-        public string FullName { get; set; }
+        public string Name { get; set; }
         public DateTime BirthDate { get; set; }
         public Gender Gender { get; set; }
         public string Avatar { get; set; }
+        public DateTime CreateDateTime { get; set; }
+        public DateTime ModifyDateTime { get; set; }
+        public DateTime? DeleteDate { get; set; }
+
+        public ICollection<Movie> FavoriteMovies { get; set; }
     }
 
     public enum Gender

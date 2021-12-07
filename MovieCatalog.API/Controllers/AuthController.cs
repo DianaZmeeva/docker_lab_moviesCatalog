@@ -16,7 +16,7 @@ using MovieCatalog.API.Models.Data;
 
 namespace MovieCatalog.API.Controllers
 {
-    [Route("api/auth")]
+    [Route("api/account")]
     [ApiController]
 
     public class AuthController : ControllerBase
@@ -48,7 +48,7 @@ namespace MovieCatalog.API.Controllers
 
             var identityUser = new User()
             {
-                FullName = userRegisterModel.FullName, 
+                Name = userRegisterModel.Name, 
                 UserName = userRegisterModel.UserName,
                 Email = userRegisterModel.Email,
                 BirthDate = userRegisterModel.BirthDate,
@@ -66,7 +66,8 @@ namespace MovieCatalog.API.Controllers
                 return new BadRequestObjectResult(new { Message = "User Registration Failed", Errors = dictionary });
             }
 
-            return Ok(new { Message = "User Reigistration Successful" });
+            var token = GenerateToken(identityUser);
+            return Ok(new { Token = token});
         }
 
 
@@ -84,7 +85,7 @@ namespace MovieCatalog.API.Controllers
             }
 
             var token = GenerateToken(identityUser);
-            return Ok(new { Token = token, Message = "Success" });
+            return Ok(new { Token = token });
         }
 
         [HttpPost]
@@ -116,7 +117,7 @@ namespace MovieCatalog.API.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, identityUser.UserName.ToString()),
+                    new Claim(ClaimTypes.Name, identityUser.UserName),
                     new Claim(ClaimTypes.Email, identityUser.Email)
                 }),
 

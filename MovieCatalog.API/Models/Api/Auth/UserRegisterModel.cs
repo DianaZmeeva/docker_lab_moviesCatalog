@@ -13,7 +13,7 @@ namespace MovieCatalog.API.Models.Api.Auth
         public string UserName { get; set; }
 
         [Required]
-        public string FullName { get; set; }
+        public string Name { get; set; }
 
         [Required]
         public string Password { get; set; }
