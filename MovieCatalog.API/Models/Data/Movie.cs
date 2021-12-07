@@ -19,6 +19,8 @@ namespace MovieCatalog.API.Models.Data
         public int? Budget { get; set; }
         public int? Fees { get; set; }
         public int AgeLimit { get; set; }
+        public double Rating { get; set; }
+        public string PosterLink { get; set; }
 
         public ICollection<Genre> Genres { get; set; }
         public ICollection<Review> Reviews { get; set; }

@@ -37,6 +37,8 @@ namespace MovieCatalog.API.Data.Migrations
                     Budget = table.Column<int>(type: "int", nullable: true),
                     Fees = table.Column<int>(type: "int", nullable: true),
                     AgeLimit = table.Column<int>(type: "int", nullable: false),
+                    Rating = table.Column<double>(type: "float", nullable: false),
+                    PosterLink = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreateDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifyDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true)

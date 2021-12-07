@@ -13,12 +13,9 @@ namespace MovieCatalog.API.Controllers
     public class BaseApiController : ControllerBase
     {
         protected ApplicationDbContext Context;
-        protected UserManager<User> UserManager;
-        public BaseApiController(ApplicationDbContext context, 
-            UserManager<User> userManager)
+        public BaseApiController(ApplicationDbContext context)
         {
             Context = context;
-            UserManager = userManager;
         }
     }
 }

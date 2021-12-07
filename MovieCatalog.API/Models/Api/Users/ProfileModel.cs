@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 using MovieCatalog.API.Models.Data;
 
-namespace MovieCatalog.API.Models.Api.User
+namespace MovieCatalog.API.Models.Api.Users
 {
     public class ProfileModel
     {

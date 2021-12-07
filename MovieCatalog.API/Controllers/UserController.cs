@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MovieCatalog.API.Data;
-using MovieCatalog.API.Models.Api.User;
+using MovieCatalog.API.Models.Api.Users;
 using MovieCatalog.API.Models.Data;
 
 namespace MovieCatalog.API.Controllers
@@ -16,15 +16,17 @@ namespace MovieCatalog.API.Controllers
     [Route("api/users")]
     public class UserController : BaseApiController
     {
+        private readonly UserManager<User> _userManager;
         public UserController(ApplicationDbContext context, 
-            UserManager<User> userManager) : base(context, userManager)
+            UserManager<User> userManager) : base(context)
         {
+            _userManager = userManager;
         }
 
         [HttpGet("/api/account/profile")]
         public async Task<ActionResult<ProfileModel>> GetProfile()
         {
-            var user = await UserManager.FindByNameAsync(User.Identity.Name);
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
             if (user == null)
             {
@@ -45,7 +47,7 @@ namespace MovieCatalog.API.Controllers
         [HttpPut("/api/account/profile")]
         public async Task<IActionResult> PutPost(ProfileModel model)
         {
-            var user = await UserManager.FindByNameAsync(User.Identity.Name);
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
             if (user == null)
             {

@@ -196,6 +196,12 @@ namespace MovieCatalog.API.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PosterLink")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Rating")
+                        .HasColumnType("float");
+
                     b.Property<string>("Tagline")
                         .HasColumnType("nvarchar(max)");
 

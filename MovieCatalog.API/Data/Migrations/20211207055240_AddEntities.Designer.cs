@@ -10,7 +10,7 @@ using MovieCatalog.API.Data;
 namespace MovieCatalog.API.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211207044912_AddEntities")]
+    [Migration("20211207055240_AddEntities")]
     partial class AddEntities
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -197,6 +197,12 @@ namespace MovieCatalog.API.Data.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PosterLink")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Rating")
+                        .HasColumnType("float");
 
                     b.Property<string>("Tagline")
                         .HasColumnType("nvarchar(max)");
