@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MovieCatalog.API.Data;
+using MovieCatalog.API.Models.Data;
 
 namespace MovieCatalog.API.Controllers
 {
@@ -11,9 +13,12 @@ namespace MovieCatalog.API.Controllers
     public class BaseApiController : ControllerBase
     {
         protected ApplicationDbContext Context;
-        public BaseApiController(ApplicationDbContext context)
+        protected UserManager<User> UserManager;
+        public BaseApiController(ApplicationDbContext context, 
+            UserManager<User> userManager)
         {
             Context = context;
+            UserManager = userManager;
         }
     }
 }
