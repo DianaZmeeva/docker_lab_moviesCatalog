@@ -111,6 +111,7 @@ namespace MovieCatalog.API.Controllers
 
             var deletedMovie = user.FavoriteMovies.FirstOrDefault(x => x.Id == id);
             user.FavoriteMovies.Remove(deletedMovie);
+            Context.Users.Update(user);
             await Context.SaveChangesAsync();
             return Ok();
         }
