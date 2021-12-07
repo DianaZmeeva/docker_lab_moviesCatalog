@@ -7,6 +7,6 @@ namespace MovieCatalog.API.Constants
 {
     public class ConfigurationConstants
     {
-        public const int DefaultPageSize = 3;
+        public const int DefaultPageSize = 6;
     }
 }
