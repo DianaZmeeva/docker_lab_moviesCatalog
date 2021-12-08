@@ -38,7 +38,8 @@ namespace MovieCatalog.API.Controllers
                 .Where(x => x.Id == user.Id)
                 .Include(u => u.FavoriteMovies)
                 .ThenInclude(m=>m.Genres)
-                .Include(m => m.Reviews)
+                .Include(u => u.FavoriteMovies)
+                .ThenInclude(m => m.Reviews)
                 .SelectMany(x => x.FavoriteMovies)
                 .Select(x=>new MovieElementModel
                 {
