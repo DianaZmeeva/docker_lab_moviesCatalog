@@ -35,6 +35,7 @@ namespace MovieCatalog.API.Controllers
 
             return new ProfileModel
             {
+                Id = user.Id,
                 NickName = user.UserName,
                 Email = user.Email,
                 AvatarLink = user.Avatar,

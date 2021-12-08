@@ -26,7 +26,8 @@ namespace MovieCatalog.API.Controllers
             var pageSize = ConfigurationConstants.DefaultPageSize;
             var movies = Context.Movies
                 .Include(m=>m.Genres)
-                .OrderByDescending(x=>x.Rating);
+                .Include(m=>m.Reviews)
+                .OrderByDescending(x=>x.Name);
 
             PageInfoModel pageInfo = new PageInfoModel()
             {
@@ -48,11 +49,15 @@ namespace MovieCatalog.API.Controllers
                         Poster = x.PosterLink,
                         Year = x.Year,
                         Country = x.Country,
-                        Rating = x.Rating,
                         Genres = x.Genres.Select(g => new GenreModel
                         {
                             Id = g.Id,
                             Name = g.Name
+                        }).ToList(),
+                        Reviews = x.Reviews.Select(r => new ReviewShortModel
+                        {
+                            Id = r.Id,
+                            Rating = r.Rating
                         }).ToList()
                     }).ToList(),
                 PageInfo = pageInfo
@@ -80,7 +85,6 @@ namespace MovieCatalog.API.Controllers
                 Poster = movie.PosterLink,
                 Year = movie.Year,
                 Country = movie.Country,
-                Rating = movie.Rating,
                 Genres = movie.Genres.Select(g => new GenreModel
                 {
                     Id = g.Id,

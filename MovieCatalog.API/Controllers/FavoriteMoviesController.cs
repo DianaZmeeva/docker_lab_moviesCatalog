@@ -10,6 +10,7 @@ using MovieCatalog.API.Data;
 using MovieCatalog.API.Models.Api.Genres;
 using MovieCatalog.API.Models.Api.Movies;
 using MovieCatalog.API.Models.Data;
+using MovieCatalog.API.Models.Api.Reviews;
 
 namespace MovieCatalog.API.Controllers
 {
@@ -37,6 +38,7 @@ namespace MovieCatalog.API.Controllers
                 .Where(x => x.Id == user.Id)
                 .Include(u => u.FavoriteMovies)
                 .ThenInclude(m=>m.Genres)
+                .Include(m => m.Reviews)
                 .SelectMany(x => x.FavoriteMovies)
                 .Select(x=>new MovieElementModel
                 {
@@ -45,7 +47,11 @@ namespace MovieCatalog.API.Controllers
                     Poster = x.PosterLink,
                     Year = x.Year,
                     Country = x.Country,
-                    Rating = x.Rating,
+                    Reviews = x.Reviews.Select(r => new ReviewShortModel
+                    {
+                        Id = r.Id,
+                        Rating = r.Rating
+                    }).ToList(),
                     Genres = x.Genres.Select(g=>new GenreModel
                     {
                         Id = g.Id,

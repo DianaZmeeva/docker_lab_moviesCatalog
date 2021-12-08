@@ -6,6 +6,7 @@ namespace MovieCatalog.API.Models.Api.Users
 {
     public class ProfileModel
     {
+        public Guid Id { get; set; }
         public string NickName { get; set; }
 
         [Required]

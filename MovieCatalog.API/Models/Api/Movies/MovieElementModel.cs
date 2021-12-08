@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MovieCatalog.API.Models.Api.Genres;
+using MovieCatalog.API.Models.Api.Reviews;
 
 namespace MovieCatalog.API.Models.Api.Movies
 {
@@ -13,7 +14,7 @@ namespace MovieCatalog.API.Models.Api.Movies
         public string Poster { get; set; }
         public int Year { get; set; }
         public string Country { get; set; }
-        public double Rating { get; set; }
         public List<GenreModel> Genres { get; set; } = new List<GenreModel>();
+        public List<ReviewShortModel> Reviews { get; set; } = new List<ReviewShortModel>();
     }
 }

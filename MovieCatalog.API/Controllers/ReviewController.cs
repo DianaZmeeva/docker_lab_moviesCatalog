@@ -62,7 +62,7 @@ namespace MovieCatalog.API.Controllers
                 Rating = model.Rating,
                 IsAnonymous = model.IsAnonymous,
                 MovieId = movieId,
-                AuthorId = model.IsAnonymous ? null : user.Id
+                AuthorId = user.Id
             };
 
             Context.Reviews.Add(review);
@@ -108,7 +108,7 @@ namespace MovieCatalog.API.Controllers
             review.ReviewText = model.ReviewText;
             review.Rating = model.Rating;
             review.IsAnonymous = model.IsAnonymous;
-            review.AuthorId = model.IsAnonymous ? null : user.Id;
+            review.AuthorId = user.Id;
 
 
             Context.Reviews.Update(review);

@@ -75,7 +75,6 @@ namespace MovieCatalog.API.Services.Initialization
                 movie.Budget = movieModel.Movie.Budget;
                 movie.Fees = movieModel.Movie.Fees;
                 movie.AgeLimit = movieModel.Movie.AgeLimit;
-                movie.Rating = movieModel.Movie.Rating;
                 movie.PosterLink = movieModel.Movie.PosterLink;
 
                 if (isMovieExist)
