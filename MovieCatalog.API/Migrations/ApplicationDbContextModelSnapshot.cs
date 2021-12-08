@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieCatalog.API.Data;
 
-namespace MovieCatalog.API.Data.Migrations
+namespace MovieCatalog.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -198,9 +198,6 @@ namespace MovieCatalog.API.Data.Migrations
 
                     b.Property<string>("PosterLink")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Rating")
-                        .HasColumnType("float");
 
                     b.Property<string>("Tagline")
                         .HasColumnType("nvarchar(max)");
