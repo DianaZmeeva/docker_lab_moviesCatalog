@@ -16,8 +16,7 @@ services:
     image: "mcr.microsoft.com/mssql/server:2019-latest"
     volumes:
         - "my_db:/var/opt/mssql" 
-    environment:
-        SA_PASSWORD: "SecurePassword123!"
-        ACCEPT_EULA: "Y"
+    env_file:
+        - MovieCatalog.API/.db.env
 volumes:
   my_db:
