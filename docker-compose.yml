@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  moviecatalog.api:
+    image: ${DOCKER_REGISTRY-}moviecatalogapi
+    build:
+      context: .
+      dockerfile: MovieCatalog.API/Dockerfile
+    ports:
+        - "8000:80"
+    env_file:
+        - MovieCatalog.API/.env
+    depends_on:
+        - db
+  db:
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    volumes:
+        - "my_db:/var/opt/mssql" 
+    environment:
+        SA_PASSWORD: "SecurePassword123!"
+        ACCEPT_EULA: "Y"
+volumes:
+  my_db:

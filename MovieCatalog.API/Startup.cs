@@ -38,7 +38,9 @@ namespace MovieCatalog.API
 
             services.AddCors();
             services.AddControllers();
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            var connection = @"Server=db;Database=DockerMoviesCatalog-API;User=sa;Password=SecurePassword123!;MultipleActiveResultSets=true;";
+            //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connection));
 
             services.AddSwaggerGen(c =>
             {
@@ -105,7 +107,7 @@ namespace MovieCatalog.API
                 .AllowAnyMethod()
                 .AllowAnyHeader());
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
