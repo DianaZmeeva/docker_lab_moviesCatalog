@@ -6,14 +6,24 @@ services:
     build:
       context: .
       dockerfile: MovieCatalog.API/Dockerfile
+      args: 
+       GIT_COMMIT: unspecified
+       BUILD_TIME: unspecified
+    container_name: moviecatalog_api
     ports:
         - "8000:80"
     env_file:
         - MovieCatalog.API/.env
     depends_on:
         - db
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+      interval: 1s
+      timeout: 3s
+      retries: 60
   db:
     image: "mcr.microsoft.com/mssql/server:2019-latest"
+    container_name: moviecatalog_api_db
     volumes:
         - "my_db:/var/opt/mssql" 
     env_file:

@@ -35,10 +35,10 @@ namespace MovieCatalog.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            var dbPassword = Environment.GetEnvironmentVariable("SA_PASSWORD") ?? "SecurePassword123!";
             services.AddCors();
             services.AddControllers();
-            var connection = @"Server=db;Database=DockerMoviesCatalog-API;User=sa;Password=SecurePassword123!;MultipleActiveResultSets=true;";
+            var connection = $@"Server=db;Database=DockerMoviesCatalog-API;User=sa;Password={dbPassword};MultipleActiveResultSets=true;";
             //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connection));
 

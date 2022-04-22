@@ -17,6 +17,10 @@ FROM build AS publish
 RUN dotnet publish "MovieCatalog.API.csproj" -c Release -o /app/publish
 
 FROM base AS final
+ARG GIT_COMMIT=unspecified
+LABEL git_commit=$GIT_COMMIT
+ARG BUILD_TIME=unspecified
+LABEL build_time=$BUILD_TIME
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "MovieCatalog.API.dll"]
